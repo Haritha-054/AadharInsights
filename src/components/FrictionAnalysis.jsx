@@ -132,36 +132,39 @@ export default function FrictionAnalysis() {
       {filtered.length === 0 ? (
         <p style={{ color: "#666" }}>No data available for this state</p>
       ) : (
-        <table style={{
-          width: "100%",
-          borderCollapse: "collapse",
-          marginTop: "16px"
-        }}>
-          <thead>
-            <tr style={{ borderBottom: "2px solid #cbd5f5",background: "linear-gradient(90deg, #F6B323 0%, #F05A28 50%, #E91E63 100%)" }}>
-              <th style={{ padding: "12px", textAlign: "left", fontWeight: "600" }}>State</th>
-              <th style={{ padding: "12px", textAlign: "left", fontWeight: "600" }}>Age Group</th>
-              <th style={{ padding: "12px", textAlign: "right", fontWeight: "600" }}>Number of Updates</th>
-              <th style={{ padding: "12px", textAlign: "left", fontWeight: "600" }}>Friction Level</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filtered.map((row, idx) => (
-              <tr key={idx} style={{ borderBottom: "1px solid #e5e7eb" }}>
-                <td style={{ padding: "12px" }}>{normalizeState(row.state) || row.state}</td>
-                <td style={{ padding: "12px" }}>{row.age_group}</td>
-                <td style={{ padding: "12px", textAlign: "right" }}>{Number(row.num_updates).toLocaleString()}</td>
-                <td style={{ padding: "12px" }}>
-                  <span className={`badge ${row.friction_level === "High" ? "red" :
-                    row.friction_level === "Medium" ? "yellow" : "green"
-                    }`}>
-                    {row.friction_level}
-                  </span>
-                </td>
+        <div className="table-responsive">
+          <table style={{
+            width: "100%",
+            borderCollapse: "collapse",
+            marginTop: "16px",
+            minWidth: "600px" // Ensure it doesn't squish too much
+          }}>
+            <thead>
+              <tr style={{ borderBottom: "2px solid #cbd5f5", background: "linear-gradient(90deg, #F6B323 0%, #F05A28 50%, #E91E63 100%)" }}>
+                <th style={{ padding: "12px", textAlign: "left", fontWeight: "600" }}>State</th>
+                <th style={{ padding: "12px", textAlign: "left", fontWeight: "600" }}>Age Group</th>
+                <th style={{ padding: "12px", textAlign: "right", fontWeight: "600" }}>Number of Updates</th>
+                <th style={{ padding: "12px", textAlign: "left", fontWeight: "600" }}>Friction Level</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {filtered.map((row, idx) => (
+                <tr key={idx} style={{ borderBottom: "1px solid #e5e7eb" }}>
+                  <td style={{ padding: "12px" }}>{normalizeState(row.state) || row.state}</td>
+                  <td style={{ padding: "12px" }}>{row.age_group}</td>
+                  <td style={{ padding: "12px", textAlign: "right" }}>{Number(row.num_updates).toLocaleString()}</td>
+                  <td style={{ padding: "12px" }}>
+                    <span className={`badge ${row.friction_level === "High" ? "red" :
+                      row.friction_level === "Medium" ? "yellow" : "green"
+                      }`}>
+                      {row.friction_level}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
 
       <p className="sub-desc" style={{ marginTop: "16px" }}>
